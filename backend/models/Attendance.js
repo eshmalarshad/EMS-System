@@ -15,6 +15,12 @@ const attendanceSchema = new mongoose.Schema(
       type: String,
       default: "Present",
     },
+    clockInTime: {
+      type: Date,
+    },
+    clockOutTime: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );
