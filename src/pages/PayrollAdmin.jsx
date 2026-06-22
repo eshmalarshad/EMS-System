@@ -78,114 +78,116 @@ export default function PayrollAdmin() {
   return (
     <div className="flex flex-col lg:flex-row gap-8">
       
-      {/* LEFT COLUMN: GENERATE SLIP FORM */}
-      <div className="w-full lg:w-1/3 bg-white p-6 rounded-2xl shadow-sm border border-gray-200/60 h-fit">
-        <h3 className="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
-          Generate Salary Slip
-        </h3>
+      {/* LEFT COLUMN: GENERATE SLIP FORM - Only visible for admins */}
+      {user?.role === "admin" && (
+        <div className="w-full lg:w-1/3 bg-white p-6 rounded-2xl shadow-sm border border-gray-200/60 h-fit">
+          <h3 className="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
+            Generate Salary Slip
+          </h3>
 
-        <form onSubmit={createPayroll} className="space-y-4">
-          
-          {/* USER SELECTION DROPDOWN */}
-          <div>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Select Employee</label>
-            <select
-              name="userId"
-              required
-              value={form.userId}
-              className="w-full p-2.5 border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 text-gray-700"
-              onChange={handleChange}
+          <form onSubmit={createPayroll} className="space-y-4">
+            
+            {/* USER SELECTION DROPDOWN */}
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Select Employee</label>
+              <select
+                name="userId"
+                required
+                value={form.userId}
+                className="w-full p-2.5 border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 text-gray-700"
+                onChange={handleChange}
+              >
+                <option value="">Choose an employee...</option>
+                {users.map((u) => (
+                  <option key={u._id} value={u._id}>
+                    {u.name} ({u.role})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* MONTH DROPDOWN */}
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Payroll Month</label>
+              <select
+                name="month"
+                required
+                value={form.month}
+                className="w-full p-2.5 border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 text-gray-700"
+                onChange={handleChange}
+              >
+                <option value="">Choose month...</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+              </select>
+            </div>
+
+            {/* BASIC SALARY */}
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Basic Salary</label>
+              <input
+                name="basicSalary"
+                type="number"
+                required
+                value={form.basicSalary}
+                className="w-full p-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 text-gray-700"
+                placeholder="Enter Basic Salary"
+                onChange={handleChange}
+              />
+            </div>
+
+            {/* BONUS */}
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Performance Bonus</label>
+              <input
+                name="bonus"
+                type="number"
+                value={form.bonus}
+                className="w-full p-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 text-gray-700"
+                placeholder="Enter Bonus"
+                onChange={handleChange}
+              />
+            </div>
+
+            {/* DEDUCTIONS */}
+            <div>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Tax & Deductions</label>
+              <input
+                name="deductions"
+                type="number"
+                value={form.deductions}
+                className="w-full p-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 text-gray-700"
+                placeholder="Enter Deductions"
+                onChange={handleChange}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold p-2.5 rounded-lg transition shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer mt-2"
             >
-              <option value="">Choose an employee...</option>
-              {users.map((u) => (
-                <option key={u._id} value={u._id}>
-                  {u.name} ({u.role})
-                </option>
-              ))}
-            </select>
-          </div>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+              Create Payroll Record
+            </button>
 
-          {/* MONTH DROPDOWN */}
-          <div>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Payroll Month</label>
-            <select
-              name="month"
-              required
-              value={form.month}
-              className="w-full p-2.5 border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 text-gray-700"
-              onChange={handleChange}
-            >
-              <option value="">Choose month...</option>
-              <option value="January">January</option>
-              <option value="February">February</option>
-              <option value="March">March</option>
-              <option value="April">April</option>
-              <option value="May">May</option>
-              <option value="June">June</option>
-              <option value="July">July</option>
-              <option value="August">August</option>
-              <option value="September">September</option>
-              <option value="October">October</option>
-              <option value="November">November</option>
-              <option value="December">December</option>
-            </select>
-          </div>
-
-          {/* BASIC SALARY */}
-          <div>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Basic Salary</label>
-            <input
-              name="basicSalary"
-              type="number"
-              required
-              value={form.basicSalary}
-              className="w-full p-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 text-gray-700"
-              placeholder="Enter Basic Salary"
-              onChange={handleChange}
-            />
-          </div>
-
-          {/* BONUS */}
-          <div>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Performance Bonus</label>
-            <input
-              name="bonus"
-              type="number"
-              value={form.bonus}
-              className="w-full p-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 text-gray-700"
-              placeholder="Enter Bonus"
-              onChange={handleChange}
-            />
-          </div>
-
-          {/* DEDUCTIONS */}
-          <div>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Tax & Deductions</label>
-            <input
-              name="deductions"
-              type="number"
-              value={form.deductions}
-              className="w-full p-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 text-gray-700"
-              placeholder="Enter Deductions"
-              onChange={handleChange}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold p-2.5 rounded-lg transition shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer mt-2"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            </svg>
-            Create Payroll Record
-          </button>
-
-        </form>
-      </div>
+          </form>
+        </div>
+      )}
 
       {/* RIGHT COLUMN: ISSUED PAYSLIPS REGISTER */}
-      <div className="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-gray-200/60 overflow-hidden">
+      <div className={`flex-1 bg-white p-6 rounded-2xl shadow-sm border border-gray-200/60 overflow-hidden ${user?.role === "admin" ? "" : "w-full"}`}>
         <h3 className="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2">
           Issued Payroll Register
         </h3>
