@@ -7,6 +7,10 @@ export default function Landing() {
     navigate("/login");
   };
 
+  const handleRegisterRedirect = () => {
+    navigate("/register");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f5f0e6] via-[#faf8f5] to-[#f0e6ff] text-gray-800 flex flex-col relative overflow-hidden font-sans">
       
@@ -49,10 +53,10 @@ export default function Landing() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
             <button
-              onClick={handleLoginRedirect}
+              onClick={handleRegisterRedirect}
               className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-violet-200/50 hover:shadow-xl transition-all hover:-translate-y-0.5 duration-200 cursor-pointer"
             >
-              LOGIN
+              CREATE AN ACCOUNT
             </button>
           </div>
         </section>
