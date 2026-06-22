@@ -20,7 +20,7 @@ export default function Register() {
         name,
         email,
         password,
-        role: "employee",
+        role: "admin",
       });
 
       // 2. Auto Login User
@@ -118,7 +118,7 @@ export default function Register() {
           <p className="text-sm text-gray-500 mt-4 text-center">
             Already have an account?{" "}
             <Link
-              to="/"
+              to="/login"
               className="text-primary font-semibold hover:underline"
             >
               Login
