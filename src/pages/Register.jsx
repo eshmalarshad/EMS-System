@@ -43,89 +43,67 @@ export default function Register() {
     <div className="min-h-screen flex items-center justify-center bg-secondary">
 
       {/* MAIN CARD */}
-      <div className="w-full max-w-4xl bg-white shadow-2xl rounded-2xl flex overflow-hidden">
+      <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-10">
 
-        {/* LEFT SIDE */}
-        <div className="w-1/2 bg-primary text-white p-10 flex flex-col justify-center">
-          <h1 className="text-3xl font-bold mb-4">
-            EMS System
-          </h1>
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">
+          Create Your Admin Account
+        </h2>
 
-          <p className="opacity-90 mb-6">
-            Join the Employee Management System and start managing your workflow
-          </p>
+        <form onSubmit={handleRegister} className="space-y-4">
 
-          <div className="space-y-2 text-sm opacity-80">
-            <p>Attendance Tracking</p>
-            <p>Leave Management</p>
-            <p>Payroll System</p>
+          {/* NAME */}
+          <div>
+            <label className="text-sm text-gray-600">Full Name</label>
+            <input
+              type="text"
+              className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              placeholder="Enter name"
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
-        </div>
 
-        {/* RIGHT SIDE FORM */}
-        <div className="w-1/2 p-10">
+          {/* EMAIL */}
+          <div>
+            <label className="text-sm text-gray-600">Email</label>
+            <input
+              type="email"
+              className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-          <h2 className="text-2xl font-bold mb-6 text-gray-800">
-            Create Account ✨
-          </h2>
+          {/* PASSWORD */}
+          <div>
+            <label className="text-sm text-gray-600">Password</label>
+            <input
+              type="password"
+              className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-          <form onSubmit={handleRegister} className="space-y-4">
+          {/* BUTTON */}
+          <button
+            type="submit"
+            className="w-full bg-primary text-white p-3 rounded-lg font-semibold hover:opacity-90 transition"
+          >
+            Create Account
+          </button>
 
-            {/* NAME */}
-            <div>
-              <label className="text-sm text-gray-600">Full Name</label>
-              <input
-                type="text"
-                className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="Enter name"
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
+        </form>
 
-            {/* EMAIL */}
-            <div>
-              <label className="text-sm text-gray-600">Email</label>
-              <input
-                type="email"
-                className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="Enter email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-
-            {/* PASSWORD */}
-            <div>
-              <label className="text-sm text-gray-600">Password</label>
-              <input
-                type="password"
-                className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="Enter password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-
-            {/* BUTTON */}
-            <button
-              type="submit"
-              className="w-full bg-primary text-white p-3 rounded-lg font-semibold hover:opacity-90 transition"
-            >
-              Create Account
-            </button>
-
-          </form>
-
-          {/* LOGIN LINK */}
-          <p className="text-sm text-gray-500 mt-4 text-center">
-            Already have an account?{" "}
-            <Link
-              to="/login"
-              className="text-primary font-semibold hover:underline"
-            >
-              Login
-            </Link>
-          </p>
-
-        </div>
+        {/* LOGIN LINK */}
+        <p className="text-sm text-gray-500 mt-4 text-center">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="text-primary font-semibold hover:underline"
+          >
+            Login
+          </Link>
+        </p>
 
       </div>
 
