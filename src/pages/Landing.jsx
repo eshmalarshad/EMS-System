@@ -141,7 +141,7 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className="py-8 bg-white/20 border-t border-white/10 mt-16 relative z-10 text-center text-xs text-gray-500">
-        <p>&copy; {new Date().getFullYear()} EMS System. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} EMS. All rights reserved.</p>
       </footer>
     </div>
   );
