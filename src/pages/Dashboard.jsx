@@ -90,7 +90,9 @@ export default function Dashboard() {
     });
     cards.push({
       title: "Payroll Management",
-      description: "Generate monthly payrolls and calculate salaries",
+      description: user?.role === "admin" 
+        ? "Review and manage employee payroll records and salary slips"
+        : "View employee payroll records and salary slips",
       path: "/payroll-admin",
       color: "from-purple-500 to-fuchsia-600",
       bgColor: "bg-white hover:border-purple-200 border-gray-200/60",
