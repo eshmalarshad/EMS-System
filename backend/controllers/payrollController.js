@@ -1,11 +1,11 @@
 const Payroll = require("../models/Payroll");
 const User = require("../models/User");
 
-// CREATE PAYROLL (HR/Admin)
+// CREATE PAYROLL (Admin only)
 exports.createPayroll = async (req, res) => {
   try {
     const requestingUserRole = req.user.role;
-   if (requestingUserRole !== "admin") {
+    if (requestingUserRole !== "admin") {
       return res.status(403).json({ message: "Only admins can create payroll records" });
     }
 
@@ -16,7 +16,7 @@ exports.createPayroll = async (req, res) => {
       return res.status(404).json({ message: "Target user not found" });
     }
 
-   if (targetUser.role !== "employee" && targetUser.role !== "hr") {
+    if (targetUser.role !== "employee" && targetUser.role !== "hr") {
       return res.status(403).json({ message: "Admin can only manage employee and HR payroll records" });
     }
 
