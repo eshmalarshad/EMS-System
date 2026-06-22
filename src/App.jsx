@@ -3,6 +3,7 @@ import { AuthProvider } from "./context/AuthContext";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Attendance from "./pages/Attendance";
 import Leave from "./pages/Leave";
@@ -18,7 +19,8 @@ function App() {
       <Routes>
 
         {/* PUBLIC */}
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
         {/* PRIVATE (INSIDE LAYOUT) */}
