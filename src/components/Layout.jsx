@@ -1,20 +1,29 @@
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Layout({ children }) {
   const { user, token, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (!token) {
-      navigate("/");
+      navigate("/login");
     }
   }, [token, navigate]);
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate("/login");
+  };
+
+  const handleBack = () => {
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -25,6 +34,18 @@ export default function Layout({ children }) {
           
           {/* BRAND & ROLE */}
           <div className="flex items-center gap-3">
+            {location.pathname !== "/dashboard" && (
+              <button
+                onClick={handleBack}
+                className="group flex items-center justify-center p-2 rounded-xl border border-slate-200/60 bg-slate-50/50 text-slate-500 hover:text-slate-800 hover:bg-slate-100/80 hover:border-slate-300 transition-all duration-200 active:scale-95 shadow-sm cursor-pointer mr-1"
+                title="Go Back"
+                aria-label="Go Back"
+              >
+                <svg className="w-4 h-4 transform group-hover:-translate-x-0.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            )}
             <Link to="/dashboard" className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-90 transition">
               <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent font-extrabold">
                 EMS System
