@@ -91,8 +91,8 @@ export default function Dashboard() {
     cards.push({
       title: "Payroll Management",
       description: user?.role === "admin" 
-        ? "Review and manage employee payroll records and salary slips"
-        : "View employee payroll records and salary slips",
+        ? "Review and Manage payroll records and salary slips"
+        : "View employee payroll records",
       path: "/payroll-admin",
       color: "from-purple-500 to-fuchsia-600",
       bgColor: "bg-white hover:border-purple-200 border-gray-200/60",
