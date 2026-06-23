@@ -32,7 +32,16 @@ exports.myLeaves = async (req, res) => {
 // GET ALL LEAVES (HR/Admin)
 exports.allLeaves = async (req, res) => {
   try {
-    const leaves = await Leave.find().populate("userId", "name email role");
+        let query = {};
+    if (req.user.role === "hr") {
+      // For HR, only show employee leaves
+      // First find all employee user IDs
+      const employees = await require("../models/User").find({ role: "employee" }).select("_id");
+      const employeeIds = employees.map(emp => emp._id);
+      query = { userId: { $in: employeeIds } };
+    }
+    // For admin, no filter - show all leaves
+    const leaves = await Leave.find(query).populate("userId", "name email role");
 
     res.json(leaves);
   } catch (error) {
