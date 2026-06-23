@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../utils/api";
 import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 export default function Attendance() {
   const { token, user } = useAuth();
@@ -43,10 +44,10 @@ export default function Attendance() {
           },
         }
       );
-      alert("Clocked in successfully!");
+      toast.success("Clocked in successfully!");
       fetchMyAttendance();
     } catch (err) {
-      alert(err.response?.data?.message || "Error clocking in");
+      toast.error(err.response?.data?.message || "Error clocking in");
     }
   };
 
@@ -61,10 +62,10 @@ export default function Attendance() {
           },
         }
       );
-      alert("Clocked out successfully!");
+      toast.success("Clocked out successfully!");
       fetchMyAttendance();
     } catch (err) {
-      alert(err.response?.data?.message || "Error clocking out");
+      toast.error(err.response?.data?.message || "Error clocking out");
     }
   };
 
