@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../utils/api";
 import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 export default function UserManagement() {
   const { token } = useAuth();
@@ -32,14 +33,14 @@ export default function UserManagement() {
         password,
         role,
       });
-      alert("Account created successfully!");
+      toast.success("Account created successfully!");
       setName("");
       setEmail("");
       setPassword("");
       setRole("employee");
       fetchUsers();
     } catch (err) {
-      alert(err.response?.data?.error || "Error registering user");
+      toast.error(err.response?.data?.error || "Error registering user");
     }
   };
 
