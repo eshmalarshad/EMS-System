@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../utils/api";
 import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 export default function Leave() {
   const { token } = useAuth();
@@ -22,13 +23,13 @@ export default function Leave() {
         { headers: { Authorization: token } }
       );
 
-      alert("Leave Applied successfully!");
+      toast.success("Leave Applied successfully!");
       setFromDate("");
       setToDate("");
       setReason("");
       fetchMyLeaves();
     } catch (err) {
-      alert("Error applying leave");
+       toast.error("Error applying leave");
     }
   };
 
