@@ -15,6 +15,10 @@ const leaveSchema = new mongoose.Schema(
       enum: ["Pending", "Approved", "Rejected"],
       default: "Pending",
     },
+    notified: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
