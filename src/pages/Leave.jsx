@@ -29,7 +29,7 @@ export default function Leave() {
       setReason("");
       fetchMyLeaves();
     } catch (err) {
-       toast.error("Error applying leave");
+      toast.error("Error applying leave");
     }
   };
 
