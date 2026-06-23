@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../utils/api";
 import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 export default function PayrollAdmin() {
   const { token, user } = useAuth();
@@ -61,7 +62,7 @@ export default function PayrollAdmin() {
         headers: { Authorization: token },
       });
 
-      alert("Payroll Created successfully!");
+     toast.success("Payroll Created successfully!");
       setForm({
         userId: "",
         month: "",
@@ -71,7 +72,7 @@ export default function PayrollAdmin() {
       });
       fetchPayrolls();
     } catch (err) {
-      alert("Error creating payroll");
+      toast.error("Error creating payroll");
     }
   };
 
