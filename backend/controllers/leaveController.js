@@ -32,7 +32,7 @@ exports.myLeaves = async (req, res) => {
 // GET ALL LEAVES (HR/Admin)
 exports.allLeaves = async (req, res) => {
   try {
-        let query = {};
+    let query = {};
     if (req.user.role === "hr") {
       // For HR, only show employee leaves
       // First find all employee user IDs
@@ -42,12 +42,12 @@ exports.allLeaves = async (req, res) => {
     }
     // For admin, no filter - show all leaves
     const leaves = await Leave.find(query).populate("userId", "name email role");
-
     res.json(leaves);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 // MARK AS NOTIFIED
 exports.markAsNotified = async (req, res) => {
   try {
@@ -65,13 +65,13 @@ exports.markAsNotified = async (req, res) => {
   }
 };
 
-
-// UPDATE STATUS (Approve / Reject)
+// UPDATE STATUS (Approve / Reject - Admin only)
 exports.updateLeaveStatus = async (req, res) => {
   try {
     if (req.user.role !== "admin") {
       return res.status(403).json({ message: "Only admins can update leave status" });
     }
+
     const { status } = req.body;
 
     const leave = await Leave.findByIdAndUpdate(
