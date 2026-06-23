@@ -32,6 +32,8 @@ export default function UserManagement() {
         email,
         password,
         role,
+      }, {
+        headers: { Authorization: token },
       });
       toast.success("Account created successfully!");
       setName("");
