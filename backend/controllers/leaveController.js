@@ -48,16 +48,36 @@ exports.allLeaves = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+// MARK AS NOTIFIED
+exports.markAsNotified = async (req, res) => {
+  try {
+    if (req.user.role !== "hr") {
+      return res.status(403).json({ message: "Only HR can mark as notified" });
+    }
+    const leave = await Leave.findByIdAndUpdate(
+      req.params.id,
+      { notified: true },
+      { returnDocument: 'after' }
+    );
+    res.json(leave);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 
 // UPDATE STATUS (Approve / Reject)
 exports.updateLeaveStatus = async (req, res) => {
   try {
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Only admins can update leave status" });
+    }
     const { status } = req.body;
 
     const leave = await Leave.findByIdAndUpdate(
       req.params.id,
       { status },
-      { new: true }
+      { returnDocument: 'after' }
     );
 
     res.json(leave);
